@@ -7,4 +7,6 @@ Travelling Salesmen Problem
 - Multiple Salesmen
 - Manhattan Distance
 
+Link to download maps/requests and test solutions:
+
 http://programmingdesignfall2014.chrisluc.co/
