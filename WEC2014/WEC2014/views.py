@@ -2,6 +2,7 @@ from django.http import HttpResponse
 import json
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.views.decorators.csrf import csrf_exempt
 import os
 import networkx as nx
 from WEC2014.utils.conversions import *
@@ -13,6 +14,7 @@ def home(request):
   return render_to_response('index.html', {"foo": "bar"},
     context_instance=RequestContext(request))
 
+@csrf_exempt
 def solve(request):
 
   maplist = request.GET.get('map').split('\n')
