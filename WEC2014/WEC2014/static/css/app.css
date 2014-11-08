@@ -97,14 +97,15 @@ a:hover, a:active {
 .slide.ng-leave-active {
   top: 100%;
 }
-.content {
+.panel {
+  float: left;
+  width: 40%;
+  margin: 50px 10px;
   font-family: 'Open Sans', sans-serif;
   _font-family: 'Helvetica Neue', Helvetica, Arial, 'sans-serif';
   font-size: 1em;
   white-space: normal;
   word-wrap: normal;
-  margin: 50px 30px 50px 50%;
-  max-width: 1200px;
   background: rgba(0,0,0,0.4);
   display: block;
   color: #FFF;
@@ -120,6 +121,9 @@ a:hover, a:active {
   -moz-transition: all .2s linear;
   -webkit-transition: all .2s linear;
 }
+.panel-left {
+  position: relative;
+}
 ul {
   margin: 0;
   padding: 0;
@@ -131,9 +135,30 @@ h3 {
   color: #FFD11A;
   text-align: center;
 }
+.panel-title {
+  font-family: 'Tangerine', cursive;
+  color: rgba(256,256,256,0.8);
+  margin: 0;
+}
 
 
 /* Input */
+.uploadDiv > * {
+  display: inline;
+}
+#map {
+  display: inline-block;
+  margin: 5px;
+  border: 1px solid white;
+  font-size: 20px;
+  font-family: Monospace;
+  white-space: pre-wrap;
+}
+.headquarters {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-family: 'Raleway', sans-serif;
+}
 table {
   border-collapse: separate;
   border-spacing: 3px 5px;
@@ -141,10 +166,28 @@ table {
 .title {
   font-size: 1.2em;
 }
+.fade {
+  color: rgba(255,255,255,0.6);
+}
 .cell-background {
   background-color: rgba(0,0,0,0.5);
   padding: 5px;
   border-radius: 5px;
+}
+.addPoint {
+  cursor: pointer;
+}
+.inputCoord {
+  width: 10px;
+  color: white;
+  background: none;
+  outline: none;
+  border: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 .label {
   color: #DDD;
@@ -156,6 +199,21 @@ table {
 .label .fa {
   margin-right: 5px;
   color: #FFD11A;
+}
+.submit {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  background: #FFD11A;
+  border: none;
+  padding: 4px 10px;
+  font-weight: 600;
+  font-size: 1em;
+  color: rgba(0,0,0,0.65);
+  cursor: pointer;
+}
+.submit:hover {
+  color: rgba(0,0,0,1);
 }
 
 
@@ -193,7 +251,7 @@ table {
   body {
     background-attachment: scroll;
   }
-  .content {
+  .panel {
     margin: 20px auto;
     width: 90%;
     font-size: 1em;
