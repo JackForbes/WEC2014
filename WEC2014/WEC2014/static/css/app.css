@@ -121,9 +121,9 @@ a:hover, a:active {
   -moz-transition: all .2s linear;
   -webkit-transition: all .2s linear;
 }
-/*.panel-left {
-  float: left;
-}*/
+.panel-left {
+  position: relative;
+}
 ul {
   margin: 0;
   padding: 0;
@@ -199,6 +199,21 @@ input::-webkit-inner-spin-button {
 .label .fa {
   margin-right: 5px;
   color: #FFD11A;
+}
+.submit {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  background: #FFD11A;
+  border: none;
+  padding: 4px 10px;
+  font-weight: 600;
+  font-size: 1em;
+  color: rgba(0,0,0,0.65);
+  cursor: pointer;
+}
+.submit:hover {
+  color: rgba(0,0,0,1);
 }
 
 

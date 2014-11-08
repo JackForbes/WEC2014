@@ -77,4 +77,8 @@ angular.module('myApp.controllers', [])
       }
     }
 
+    $scope.submit = function() {
+      $scope.output = "Doesn't do anything yet";
+    }
+
   }]);
