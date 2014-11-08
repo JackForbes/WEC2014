@@ -22,3 +22,44 @@ def map2graph(maplist):
     return G, hq
 
 
+def data2json(nodes, action_ids, package_ids):
+    import json
+    action_names = {
+        '0' : 'start',
+        '1' : 'drive',
+        '2' : 'pickup',
+        '3' : 'dropoff',
+    }
+
+    output = {
+        'carrierId' : 'mofo1',
+        'actions' : []
+    }
+
+    for (node, action_id, package_id) in zip(nodes, action_ids, package_ids):
+        action_name = action_names[str(action_id)]
+
+        if action_id in (2,3):
+            action_drive = {
+                'action' : 'drive',
+                'x' : node[0],
+                'y' : node[1]
+            }
+
+            action = {
+                'action' : action_name,
+                'id': package_id
+            }
+
+            output['actions'].append(action_drive)
+            output['actions'].append(action)
+        else:
+            action = {
+                'action' : action_name,
+                'x' : node[0],
+                'y' : node[1],
+            }
+            output['actions'].append(action)
+
+
+    return output
