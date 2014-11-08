@@ -34,6 +34,7 @@ def solve_map (request):
             "x": 0
           },
           "deliveryFee": 10,
+          "id": 0
         },
         {
           "dropoff": {
@@ -45,79 +46,91 @@ def solve_map (request):
             "x": 1
           },
         "deliveryFee": 10,
-
+        "id": 1
         }
       ]
     }
 
   
   (G, hq) = map2graph(graph_map)
-  pd_pairs, revenue = convert_request_to_pd(request_data)
-  (nodes, actions, cost, wait_time) = solve_case(G, hq, pd_pairs)
+  pd_pairs, revenue, ids = convert_request_to_pd(request_data)
+  (nodes, actions, cost, wait_time, id_data) = solve_case(G, hq, pd_pairs, ids)
   
-  output = data2json(nodes, actions, [0]*len(actions)) 
+  output = data2json(nodes, actions, id_data) 
   data = {
     "cost": cost,
     "revenue": revenue,
     "output": output,
-    "wait_time": wait_time
+    "wait_time": sum(wait_time)
   }
   return HttpResponse(
     content = json.dumps(data),
     content_type = "application/json"
   )
 
-def solve_case(G, start, pd):
+def solve_case(G, start, pd, ids):
   unvisited = pd
   prev = start
   visited_nodes = []
   visited_nodes.append(prev)
   actions = []
+
   cost = 50
   actions.append(0)
   pd_paths = {pd_tuple: nx.shortest_path(G, pd_tuple[0], pd_tuple[1])
     for pd_tuple in unvisited}
   min_path = []
   wait_times = []
+  id_data = [0];
   number_of_actions = 0
+  
   while len(unvisited) > 0:
     for n in unvisited:
       current_path_to_next = nx.shortest_path(G, prev, n[0])
       pd_path = pd_paths[n]
+
       if len(min_path) == 0 or len(current_path_to_next) + len(pd_path) < len(min_path):
         min_path = current_path_to_next
         next_pair = n;
+
     actions += [1]*(len(min_path)-2)
+    id_data += [1]*(len(min_path)-2)
     number_of_actions += len(min_path)-2
     visited_nodes += min_path[1:]
+
     actions.append(2)
+    id_data.append(ids[next_pair]);
     number_of_actions += 2
-    
+
     visited_nodes += pd_paths[next_pair][1:]
     actions += [1]*(len(pd_paths[next_pair])-2)
+    id_data += [1]*(len(pd_paths[next_pair])-2)
     number_of_actions += (len(pd_paths[next_pair])-2)
+
     actions.append(3)
+    id_data.append(ids[next_pair])
     number_of_actions += 2
-    
+
     wait_times.append(number_of_actions);
-      
+
     unvisited.remove(next_pair)
-    prev = next_pair[1] 
+    prev = next_pair[1]
     min_path = []
 
-
   cost += len(visited_nodes)-1
-  # return visited_nodes, actions, cost, sum(wait_times)
-  return visited_nodes, actions, cost, wait_times
+
+  return visited_nodes, actions, cost, wait_times, id_data
 
 def convert_request_to_pd (req):
   l = []
   revenue = 0
+  ids = {}
   for k in req['requests']:
     pick = k['pickup']
     drop = k['dropoff']
-
-    l.append(((pick['x'], pick['y']), (drop['x'], drop['y'])))
+    pd_tuple = ((pick['x'], pick['y']), (drop['x'], drop['y']))
+    l.append(pd_tuple)
+    ids[pd_tuple] = k['id']
     revenue += k['deliveryFee']
-  return l, revenue
+  return l, revenue, ids
  
