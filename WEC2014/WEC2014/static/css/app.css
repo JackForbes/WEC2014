@@ -100,7 +100,7 @@ a:hover, a:active {
 .panel {
   float: left;
   width: 40%;
-  margin: 50px 10px;
+  margin: 200px 10px;
   font-family: 'Open Sans', sans-serif;
   _font-family: 'Helvetica Neue', Helvetica, Arial, 'sans-serif';
   font-size: 1em;
@@ -251,10 +251,10 @@ input::-webkit-inner-spin-button {
   body {
     background-attachment: scroll;
   }
-  .panel {
+/*  .panel {
     margin: 20px auto;
     width: 90%;
     font-size: 1em;
     padding: 10px;
-  }
+  }*/
 }
