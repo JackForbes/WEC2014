@@ -13,44 +13,23 @@ def home(request):
   return render_to_response('index.html', {"foo": "bar"},
     context_instance=RequestContext(request))
 
+def solve(request):
+  content = {'motherfucking' : 'animals'}
+  return HttpResponse(
+    content = json.dumps(content),
+    content_type = "application/json"
+  )
+
 def solve_map (request):
   # graph_map = request.GET.get('map')
   # graph_map = graph_map.split('\n')
   # request_data = request.GET.get('request_data')
-  graph_map = [
-      '   ',
-      'X X',
-      'H X'
-  ]
-  request_data = {
-      "requests": [
-        {
-          "dropoff": {
-            "y": 1,
-            "x": 2
-          },
-          "pickup": {
-            "y": 0,
-            "x": 0
-          },
-          "deliveryFee": 10,
-          "id": 0
-        },
-        {
-          "dropoff": {
-            "y": 2,
-            "x": 0
-          },
-          "pickup": {
-            "y": 1,
-            "x": 1
-          },
-        "deliveryFee": 10,
-        "id": 1
-        }
-      ]
-    }
+  
+  
+  with open('../input/Maps/map8_1.txt', 'r') as f:
+    graph_map = f.read()
 
+  request_data = json.load(open('../input/Requests/requests8_1.txt'))
   
   (G, hq) = map2graph(graph_map)
   pd_pairs, revenue, ids = convert_request_to_pd(request_data)
@@ -77,8 +56,11 @@ def solve_case(G, start, pd, ids):
 
   cost = 50
   actions.append(0)
-  pd_paths = {pd_tuple: nx.shortest_path(G, pd_tuple[0], pd_tuple[1])
-    for pd_tuple in unvisited}
+  try:
+    pd_paths = {pd_tuple: nx.shortest_path(G, pd_tuple[0], pd_tuple[1])
+      for pd_tuple in unvisited}
+  except: 
+    pass
   min_path = []
   wait_times = []
   id_data = [0];
