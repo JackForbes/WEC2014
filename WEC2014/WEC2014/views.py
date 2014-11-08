@@ -18,16 +18,17 @@ def home(request):
 def solve(request):
 
   # maplist = request.GET.get('map').split('\n')
-  maplist = request.POST.get('map')
-  request_data = request.POST.get('delivery_requests')
+  # maplist = request.POST.get('map')
+  # request_data = request.POST.get('delivery_requests')
 
-  output = {
-    'map' : maplist,
-    'request_data' : request_data
-  }
+  # output = {
+  #   'map' : maplist,
+  #   'request_data' : request_data
+  # }
+
 
   return HttpResponse(
-    content = json.dumps(output),
+    content = json.dumps(request.POST),
     content_type = "application/json"
   )
 
