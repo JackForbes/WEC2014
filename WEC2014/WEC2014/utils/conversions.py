@@ -1,6 +1,5 @@
-import networkx as nx
-
 def map2graph(maplist):
+    import networkx as nx
     G = nx.Graph()
     hq = (0,0);
     for i in xrange(len(maplist)):
@@ -21,3 +20,5 @@ def map2graph(maplist):
                     except IndexError:
                         pass
     return G, hq
+
+
