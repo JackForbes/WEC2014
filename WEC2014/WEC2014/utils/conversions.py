@@ -31,10 +31,10 @@ def data2json(nodes, action_ids, package_ids):
         '3' : 'dropoff',
     }
 
-    output = {
+    output = [{
         'carrierId' : 'mofo1',
         'actions' : []
-    }
+    }]
 
     for (node, action_id, package_id) in zip(nodes, action_ids, package_ids):
         action_name = action_names[str(action_id)]
@@ -51,15 +51,15 @@ def data2json(nodes, action_ids, package_ids):
                 'id': package_id
             }
 
-            output['actions'].append(action_drive)
-            output['actions'].append(action)
+            output[0]['actions'].append(action_drive)
+            output[0]['actions'].append(action)
         else:
             action = {
                 'action' : action_name,
                 'x' : node[0],
                 'y' : node[1],
             }
-            output['actions'].append(action)
+            output[0]['actions'].append(action)
 
 
     return output
