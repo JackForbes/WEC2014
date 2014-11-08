@@ -37,14 +37,30 @@
   </div> -->
 
 
-  <div class="content slide">
-    <h2>Input:</h2>
+  <div class="slide panel panel-left">
+    <h3 class="panel-title">Input</h3>
+    <div class="uploadDiv">
+      <h4>Upload Map:</h4>
+      <input type="file" fileread map="true" />
+    </div>
+    <div id="map" ng-show="map"></div>
+    <div class="uploadDiv">
+      <h4>Upload Requests:</h4>
+      <input type="file" fileread />
+    </div>
     <div>
-      <h2> Headquarters: ({{inputData.deliveryHeadquarter.x}}, {{inputData.deliveryHeadquarter.y}})</h2>
+      <h5 class="headquarters">Headquarters: (
+        <input class="inputCoord" type="number" ng-model="headquarterX" ng-show="!inputData.deliveryHeadquarter.x" autofocus />
+        {{inputData.deliveryHeadquarter.x}},
+        <input class="inputCoord" type="number" ng-model="headquarterY" ng-show="!inputData.deliveryHeadquarter.y" />
+        {{inputData.deliveryHeadquarter.y}})
+      </h5>
+      <i class="fa fa-plus-square addPoint" ng-click="addHeadquarter()" ng-show="!inputData.deliveryHeadquarter.x"></i>
       <table>
       <tbody>
+        <tr><td>#</td><td>Dropoff</td><td>Pickup</td></tr>
         <tr ng-repeat="request in inputData.requests ">
-          <td><h4>{{request.id}}</h4></td>
+          <td><h3>{{request.id}}</h3></td>
           <td class="cell-background">
             <small class="label label-username">
               <i class="fa fa-suitcase"></i>({{request.dropoff.x}}, {{request.dropoff.y}})
@@ -55,10 +71,45 @@
               <i class="fa fa-taxi"></i>({{request.pickup.x}}, {{request.pickup.y}})
             </small>
           </td>
+          <td class="cell-background">
+            <small class="label label-comments">
+              <i class="fa fa-dollar"></i>{{request.deliveryFee}}
+            </small>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <!-- <h3 class="fade">{{inputData.requests.length + 1}}</h3> -->
+            <i class="fa fa-plus-square addPoint" ng-click="addPoint()"></i>
+          </td>
+          <td class="cell-background">
+           <small class="label label-username">
+             <i class="fa fa-suitcase"></i>(
+             <input class="inputCoord" type="number" ng-model="requestDropoffX" />,
+             <input class="inputCoord" type="number" ng-model="requestDropoffY" />)
+           </small>
+          </td>
+          <td class="cell-background">
+           <small class="label label-comments">
+             <i class="fa fa-taxi"></i>(
+             <input class="inputCoord" type="number" ng-model="requestPickupX" />,
+             <input class="inputCoord" type="number" ng-model="requestPickupY" />)
+           </small>
+          </td>
+          <td class="cell-background">
+            <small class="label label-comments">
+              <i class="fa fa-dollar"></i>
+              <input class="inputCoord" type="number" ng-model="requestFee" />
+            </small>
+          </td>
         </tr>
       </tbody>
       </table>
     </div>
+  </div>
+
+  <div class="slide panel panel-right">
+    <h3 class="panel-title">Output</h3>
   </div>
 
 <!--   <div class="footer" ng-class="{'relative': elements.length > 1}">
