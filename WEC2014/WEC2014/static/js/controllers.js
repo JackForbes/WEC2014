@@ -61,8 +61,14 @@ angular.module('myApp.controllers', [])
     }
 
     $scope.getIcon = function(action) {
-      if (action ) {
-
+      if (action == "start") {
+        return "fa-arrow-circle-o-right";
+      } else if (action == "drive") {
+        return "fa-taxi";
+      } else if (action == "pickup") {
+        return "fa-suitcase";
+      } else if (action == "dropoff") {
+        return "fa-map-marker";
       }
     }
 
