@@ -155,6 +155,7 @@ h3 {
   white-space: pre-wrap;
   overflow: scroll;
   max-width: 100%;
+  max-height: 500px;
 }
 .headquarters, .carrier {
   display: inline-block;
@@ -167,6 +168,11 @@ table {
 }
 .title {
   font-size: 1.2em;
+}
+.inputData, .carrierData {
+  max-height: 500px;
+  overflow: scroll;
+  display: inline-block;
 }
 .fade {
   color: rgba(255,255,255,0.6);
@@ -220,8 +226,30 @@ input::-webkit-inner-spin-button {
 
 
 /* Output */
-.profit > * {
+.profit > *, .wait > * {
   display: inline-block;
+  margin: 0;
+}
+.profit h5, .profit i, .wait h5, .wait i {
+  color: #FFD11A;
+}
+.wait {
+  margin-bottom: 10px;
+}
+.highlight {
+  background: orange;
+}
+.taxiMap {
+  display: inline-block;
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+#deliveryCar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #FFD11A;
 }
 
 

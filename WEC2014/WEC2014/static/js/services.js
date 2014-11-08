@@ -21,37 +21,36 @@ angular.module('myApp.services', []).
         ],
         "deliveryHeadquarter": {}
       },
-      sampleOutput: [
-        // {
-        //   "carrierId": "car1",
-        //   "actions": [
-        //     {
-        //       "action": "start",
-        //       "x": 1,
-        //       "y": 3
-        //     },
-        //     {
-        //       "action": "drive",
-        //       "x": 2,
-        //       "y": 3
-        //     },
-        //     {
-        //       "action": "pickup",
-        //       "x": 3,
-        //       "y": 3
-        //     },
-        //     {
-        //       "action": "drive",
-        //       "x": 4,
-        //       "y": 3
-        //     },
-        //     {
-        //       "action": "dropoff",
-        //       "x": 5,
-        //       "y": 3
-        //     }
-        //   ]
-        // }
-      ]
+      sampleOutput: {
+        "output": [
+          {
+          "carrierId": "car1",
+          "actions": [
+            {
+              "action": "start",
+              "x": 1,
+              "y": 3
+            },
+            {
+              "action": "drive",
+              "x": 2,
+              "y": 3
+            },
+            {
+              "action": "pickup",
+              "id":4
+            },
+            {
+              "action": "drive",
+              "x": 4,
+              "y": 3
+            },
+            {
+              "action": "dropoff",
+              "id": 5
+            }
+          ]
+        }
+      ]}
     };
   }]);

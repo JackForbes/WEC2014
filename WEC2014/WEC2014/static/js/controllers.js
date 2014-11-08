@@ -6,7 +6,7 @@ angular.module('myApp.controllers', [])
 
     $scope.initialize = function() {
       $scope.inputData = SiteModel.emptyInput;
-      $scope.outputData = SiteModel.sampleOutput;
+      // $scope.outputData = SiteModel.sampleOutput;
     };
 
     $scope.addPoint = function() {
@@ -48,17 +48,53 @@ angular.module('myApp.controllers', [])
         "map": $scope.map,
         "delivery_requests": $scope.inputData
       };
-      console.log(allInputData);
 
       $http.post('/solve', allInputData).
         success(function(data, status, headers, config) {
-          console.log(data);
           $scope.outputData = data;
+          $scope.moveDeliveryCar();
         }).
         error(function(data, status, headers, config) {
           console.log(data);
           console.log('Ran into a problem submitting!');
         });
+    }
+
+    $scope.moveDeliveryCar = function() {
+      var car = document.getElementById("deliveryCar");
+      var increment = 10000/$scope.outputData.output[0].actions.length;
+      var time = increment;
+      var max = 0;
+      $scope.outputData.output[0].actions.forEach(function(obj, index) {
+        if (obj.x > max) {
+          max = obj.x;
+        }
+        if (obj.y > max) {
+          max = obj.y;
+        }
+      });
+
+      var ratio = 250 / max;
+
+      $scope.outputData.output[0].actions.forEach(function(obj, index) {
+        setTimeout(function() {
+          var rows = document.querySelectorAll('#outputCoordinates tr');
+          if (obj.x && obj.y) {
+            var x = parseInt(obj.x) * ratio;
+            var y = parseInt(obj.y) * ratio;
+            car.style.left = x.toString() + "px";
+            car.style.bottom = y.toString() + "px";
+            $(rows[index]).removeClass('highlight');
+            $(rows[index+1]).addClass('highlight');
+            // $(".carrierData").scrollTop($(rows[index]).offset().top - ($(".carrierData").height()/2) )
+          } else {
+            $(rows[index]).removeClass('highlight');
+            $(rows[index+1]).addClass('highlight');
+            // $(".carrierData").scrollTop($(rows[index]).offset().top - ($(".carrierData").height()/2) )
+          }
+        }, time);
+        time += increment;
+      });
     }
 
     $scope.getIcon = function(action) {
