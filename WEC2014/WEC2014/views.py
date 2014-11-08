@@ -18,8 +18,8 @@ def home(request):
 def solve(request):
 
   # maplist = request.GET.get('map').split('\n')
-  maplist = request.GET.get('map')
-  request_data = request.GET.get('delivery_requests')
+  maplist = request.POST.get('map')
+  request_data = request.POST.get('delivery_requests')
 
   output = {
     'map' : maplist,
