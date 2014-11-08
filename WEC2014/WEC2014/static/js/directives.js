@@ -75,17 +75,15 @@ directive('autocomplete', function() {
         var reader = new FileReader();
         reader.onload = function(loadEvent) {
           var fileText = loadEvent.target.result;
-          console.log(fileText);
           if (attributes.map) {
             var mapDiv = document.getElementById("map");
             mapDiv.innerText = fileText;
             scope.$apply(function () {
-              scope.map = true;
+              scope.map = fileText;
             });
           } else {
             var parsedJSON = JSON.parse(fileText);
-            console.log('parsed Obj', parsedJSON);
-            scope.$apply(function () {
+            scope.$apply(function() {
               scope.inputData = parsedJSON;
             });
           }
