@@ -17,20 +17,26 @@ def home(request):
 @csrf_exempt
 def solve(request):
 
-  # maplist = request.GET.get('map').split('\n')
-  # maplist = request.POST.get('map')
-  # request_data = request.POST.get('delivery_requests')
+  maplist = json.loads(request.body).get('map').split('\n')
+  request_data = json.loads(request.body).get('delivery_requests')
 
-  # output = {
-  #   'map' : maplist,
-  #   'request_data' : request_data
-  # }
-
-
+  (G, hq) = map2graph(maplist)
+  # print G.nodes()
+  pd_pairs, revenue, ids = convert_request_to_pd(request_data)
+  (nodes, actions, cost, wait_time, id_data) = solve_case(G, hq, pd_pairs, ids)
+  
+  output = data2json(nodes, actions, id_data) 
+  data = {
+    "cost": cost,
+    "revenue": revenue,
+    "output": output,
+    "wait_time": sum(wait_time)
+  }
   return HttpResponse(
-    content = json.dumps(request.POST),
+    content = json.dumps(data),
     content_type = "application/json"
   )
+
 
 def solve_map (request):
   # graph_map = request.GET.get('map')
