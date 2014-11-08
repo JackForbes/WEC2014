@@ -154,7 +154,7 @@ h3 {
   font-family: Monospace;
   white-space: pre-wrap;
 }
-.headquarters {
+.headquarters, .carrier {
   display: inline-block;
   margin-bottom: 5px;
   font-family: 'Raleway', sans-serif;
