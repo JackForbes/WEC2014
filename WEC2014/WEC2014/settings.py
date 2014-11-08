@@ -2,13 +2,14 @@
 import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+STATIC_URL = '/static/'
+BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
 MANAGERS = ADMINS
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -81,6 +82,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '(9)$jwj3)@=)l)khi9sf$jv-k2_mp6o4!$z=-@@+x+@01f7^4o'
@@ -106,7 +108,6 @@ ROOT_URLCONF = 'WEC2014.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'WEC2014.wsgi.application'
-BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates/')
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
