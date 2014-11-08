@@ -14,9 +14,17 @@ def home(request):
     context_instance=RequestContext(request))
 
 def solve(request):
-  content = {'motherfucking' : 'animals'}
+
+  maplist = request.GET.get('map').split('\n')
+  request_data = request.GET.get('delivery_requests')
+
+  output = {
+    'map' : maplist,
+    'request_data' : request_data
+  }
+
   return HttpResponse(
-    content = json.dumps(content),
+    content = json.dumps(output),
     content_type = "application/json"
   )
 
