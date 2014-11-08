@@ -17,7 +17,8 @@ def home(request):
 @csrf_exempt
 def solve(request):
 
-  maplist = request.GET.get('map').split('\n')
+  # maplist = request.GET.get('map').split('\n')
+  maplist = request.GET.get('map')
   request_data = request.GET.get('delivery_requests')
 
   output = {
