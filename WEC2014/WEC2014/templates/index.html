@@ -38,17 +38,17 @@
       <i class="fa fa-plus-square addPoint" ng-click="addHeadquarter()" ng-show="!inputData.deliveryHeadquarter.x"></i>
       <table>
       <tbody>
-        <tr><td>#</td><td>Dropoff</td><td>Pickup</td></tr>
+        <tr><td>#</td><td>Pickup</td><td>Dropoff</td></tr>
         <tr ng-repeat="request in inputData.requests ">
           <td><h3>{{request.id}}</h3></td>
           <td class="cell-background">
-            <small class="label label-username">
-              <i class="fa fa-suitcase"></i>({{request.dropoff.x}}, {{request.dropoff.y}})
+            <small class="label label-comments">
+              <i class="fa fa-taxi"></i>({{request.pickup.x}}, {{request.pickup.y}})
             </small>
           </td>
           <td class="cell-background">
-            <small class="label label-comments">
-              <i class="fa fa-taxi"></i>({{request.pickup.x}}, {{request.pickup.y}})
+            <small class="label label-username">
+              <i class="fa fa-suitcase"></i>({{request.dropoff.x}}, {{request.dropoff.y}})
             </small>
           </td>
           <td class="cell-background">
@@ -62,17 +62,17 @@
             <i class="fa fa-plus-square addPoint" ng-click="addPoint()"></i>
           </td>
           <td class="cell-background">
-           <small class="label label-username">
-             <i class="fa fa-suitcase"></i>(
-             <input class="inputCoord" type="number" ng-model="requestDropoffX" />,
-             <input class="inputCoord" type="number" ng-model="requestDropoffY" />)
-           </small>
-          </td>
-          <td class="cell-background">
            <small class="label label-comments">
              <i class="fa fa-taxi"></i>(
              <input class="inputCoord" type="number" ng-model="requestPickupX" />,
              <input class="inputCoord" type="number" ng-model="requestPickupY" />)
+           </small>
+          </td>
+          <td class="cell-background">
+           <small class="label label-username">
+             <i class="fa fa-suitcase"></i>(
+             <input class="inputCoord" type="number" ng-model="requestDropoffX" />,
+             <input class="inputCoord" type="number" ng-model="requestDropoffY" />)
            </small>
           </td>
           <td class="cell-background">
@@ -90,7 +90,13 @@
 
   <div class="slide panel panel-right">
     <h3 class="panel-title">Output</h3>
-    <div ng-repeat="carrier in outputData">
+    <div class="profit" ng-show="outputData.revenue">
+      <h4>Profit: </h4>
+      <h5>{{outputData.revenue}}</h5> -
+      <h5>{{outputData.cost}}</h5> =
+      <h5>{{outputData.revenue - outputData.cost}}</h5>
+    </div>
+    <div ng-repeat="carrier in outputData.output">
         <div>
           <h5 class="carrier">Carrier: {{carrier.carrierId}}</h5>
           <table>
@@ -104,7 +110,7 @@
               </td>
               <td class="cell-background">
                 <small class="label label-username">
-                  <i class="fa fa-suitcase"></i>({{action.x}}, {{action.y}})
+                  <i class="fa fa-map-marker"></i>{{getActionText(action)}}
                 </small>
               </td>
             </tr>

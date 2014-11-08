@@ -53,6 +53,7 @@ angular.module('myApp.controllers', [])
       $http.post('/solve', allInputData).
         success(function(data, status, headers, config) {
           console.log(data);
+          $scope.outputData = data;
         }).
         error(function(data, status, headers, config) {
           console.log(data);
@@ -68,7 +69,16 @@ angular.module('myApp.controllers', [])
       } else if (action == "pickup") {
         return "fa-suitcase";
       } else if (action == "dropoff") {
-        return "fa-map-marker";
+        return "fa-check";
+      }
+    }
+
+    $scope.getActionText = function(action) {
+      if (action.action == "pickup" || action.action == "dropoff") {
+        return action.id;
+      } else {
+        var coordinate = "(" + action.y + ", " + action.x + ")";
+        return coordinate;
       }
     }
 

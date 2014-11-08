@@ -153,6 +153,8 @@ h3 {
   font-size: 20px;
   font-family: Monospace;
   white-space: pre-wrap;
+  overflow: scroll;
+  max-width: 100%;
 }
 .headquarters, .carrier {
   display: inline-block;
@@ -214,6 +216,12 @@ input::-webkit-inner-spin-button {
 }
 .submit:hover {
   color: rgba(0,0,0,1);
+}
+
+
+/* Output */
+.profit > * {
+  display: inline-block;
 }
 
 
