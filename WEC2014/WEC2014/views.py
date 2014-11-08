@@ -13,119 +13,24 @@ def home(request):
   return render_to_response('index.html', {"foo": "bar"},
     context_instance=RequestContext(request))
 
+def solve(request):
+  content = {'motherfucking' : 'animals'}
+  return HttpResponse(
+    content = json.dumps(content),
+    content_type = "application/json"
+  )
+
 def solve_map (request):
   # graph_map = request.GET.get('map')
   # graph_map = graph_map.split('\n')
   # request_data = request.GET.get('request_data')
-  graph_map = [
-'XXXXXXXXXXXXXXXXXXXX', 'X                  X', 'X  XXXXXX XXXX X   X', 'X XXXXXXX XXXX XX XX', 'X XXXXXXX XXXX XX XX', 'X                  X', 'X XXX XXX XXXX XX XX', 'X XXX XXX XXXX XX XX', 'X XXX XXX XXXX XX XX', 'X  X   XXHXXX      X', 'X                  X', 'X  XXXXXXXXXXX XX XX', 'X XXXXXXXXXXXX XX XX', 'X  XXXXXXXXXX   X XX', 'X                  X', 'X  XXXXXXXXXX XXX  X', 'X XXXXXXXXXXX XXXX X', 'X                  X', 'X XXXXXXXXXXX XXXX X', 'XXXXXXXXXXXXXXXXXXXX']
+  with open('../input/Maps/map100_1.txt', 'r') as f:
+    graph_map = f.read().split('\n')
 
-  request_data = {
-    "requests": [
-        {
-            "dropoff": {
-                "y": 1,
-                "x": 4
-            },
-            "pickup": {
-                "y": 17,
-                "x": 3
-            },
-            "deliveryFee": 34.0,
-            "id": 1
-        },
-        {
-            "dropoff": {
-                "y": 1,
-                "x": 10
-            },
-            "pickup": {
-                "y": 14,
-                "x": 10
-            },
-            "deliveryFee": 26.0,
-            "id": 2
-        },
-        {
-            "dropoff": {
-                "y": 7,
-                "x": 1
-            },
-            "pickup": {
-                "y": 6,
-                "x": 9
-            },
-            "deliveryFee": 18.0,
-            "id": 3
-        },
-        {
-            "dropoff": {
-                "y": 14,
-                "x": 3
-            },
-            "pickup": {
-                "y": 13,
-                "x": 2
-            },
-            "deliveryFee": 4.0,
-            "id": 4
-        },
-        {
-            "dropoff": {
-                "y": 7,
-                "x": 1
-            },
-            "pickup": {
-                "y": 5,
-                "x": 11
-            },
-            "deliveryFee": 24.0,
-            "id": 5
-        },
-        {
-            "dropoff": {
-                "y": 2,
-                "x": 16
-            },
-            "pickup": {
-                "y": 6,
-                "x": 9
-            },
-            "deliveryFee": 22.0,
-            "id": 6
-        },
-        {
-            "dropoff": {
-                "y": 9,
-                "x": 15
-            },
-            "pickup": {
-                "y": 8,
-                "x": 17
-            },
-            "deliveryFee": 6.0,
-            "id": 7
-        },
-        {
-            "dropoff": {
-                "y": 1,
-                "x": 16
-            },
-            "pickup": {
-                "y": 9,
-                "x": 18
-            },
-            "deliveryFee": 20.0,
-            "id": 8
-        }
-    ],
-    "deliveryHeadquarter": {
-        "y": 9,
-        "x": 9
-    }
-}
+  request_data = json.load(open('../input/Requests/requests100_1.txt'))
   
   (G, hq) = map2graph(graph_map)
+  print G.nodes()
   pd_pairs, revenue, ids = convert_request_to_pd(request_data)
   (nodes, actions, cost, wait_time, id_data) = solve_case(G, hq, pd_pairs, ids)
   
@@ -150,8 +55,11 @@ def solve_case(G, start, pd, ids):
 
   cost = 50
   actions.append(0)
-  pd_paths = {pd_tuple: nx.shortest_path(G, pd_tuple[0], pd_tuple[1])
-    for pd_tuple in unvisited}
+  try:
+    pd_paths = {pd_tuple: nx.shortest_path(G, pd_tuple[0], pd_tuple[1])
+      for pd_tuple in unvisited}
+  except: 
+    pass
   min_path = []
   wait_times = []
   id_data = [0];

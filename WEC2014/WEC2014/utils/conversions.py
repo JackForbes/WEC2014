@@ -6,7 +6,7 @@ def map2graph(maplist):
         for j in xrange(len(maplist[0])):
 
             if (maplist[i][j] == 'H'):
-                hq = (i,j)
+                hq = (j, i)
 
             if not(maplist[i][j] == 'X'):
                 neighbours = filter(
@@ -16,7 +16,7 @@ def map2graph(maplist):
                 for (i_n, j_n) in neighbours:
                     try:
                         if not(maplist[i_n][j_n] == 'X'):
-                            G.add_edge((j_n,i_n),(j,i));
+                            G.add_edge((j_n, i_n),(j,i));
                     except IndexError:
                         pass
     return G, hq
