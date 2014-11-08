@@ -18,39 +18,112 @@ def solve_map (request):
   # graph_map = graph_map.split('\n')
   # request_data = request.GET.get('request_data')
   graph_map = [
-      '   ',
-      'X X',
-      'H X'
-  ]
+'XXXXXXXXXXXXXXXXXXXX', 'X                  X', 'X  XXXXXX XXXX X   X', 'X XXXXXXX XXXX XX XX', 'X XXXXXXX XXXX XX XX', 'X                  X', 'X XXX XXX XXXX XX XX', 'X XXX XXX XXXX XX XX', 'X XXX XXX XXXX XX XX', 'X  X   XXHXXX      X', 'X                  X', 'X  XXXXXXXXXXX XX XX', 'X XXXXXXXXXXXX XX XX', 'X  XXXXXXXXXX   X XX', 'X                  X', 'X  XXXXXXXXXX XXX  X', 'X XXXXXXXXXXX XXXX X', 'X                  X', 'X XXXXXXXXXXX XXXX X', 'XXXXXXXXXXXXXXXXXXXX']
+
   request_data = {
-      "requests": [
+    "requests": [
         {
-          "dropoff": {
-            "y": 1,
-            "x": 2
-          },
-          "pickup": {
-            "y": 0,
-            "x": 0
-          },
-          "deliveryFee": 10,
-          "id": 0
+            "dropoff": {
+                "y": 1,
+                "x": 4
+            },
+            "pickup": {
+                "y": 17,
+                "x": 3
+            },
+            "deliveryFee": 34.0,
+            "id": 1
         },
         {
-          "dropoff": {
-            "y": 2,
-            "x": 0
-          },
-          "pickup": {
-            "y": 1,
-            "x": 1
-          },
-        "deliveryFee": 10,
-        "id": 1
+            "dropoff": {
+                "y": 1,
+                "x": 10
+            },
+            "pickup": {
+                "y": 14,
+                "x": 10
+            },
+            "deliveryFee": 26.0,
+            "id": 2
+        },
+        {
+            "dropoff": {
+                "y": 7,
+                "x": 1
+            },
+            "pickup": {
+                "y": 6,
+                "x": 9
+            },
+            "deliveryFee": 18.0,
+            "id": 3
+        },
+        {
+            "dropoff": {
+                "y": 14,
+                "x": 3
+            },
+            "pickup": {
+                "y": 13,
+                "x": 2
+            },
+            "deliveryFee": 4.0,
+            "id": 4
+        },
+        {
+            "dropoff": {
+                "y": 7,
+                "x": 1
+            },
+            "pickup": {
+                "y": 5,
+                "x": 11
+            },
+            "deliveryFee": 24.0,
+            "id": 5
+        },
+        {
+            "dropoff": {
+                "y": 2,
+                "x": 16
+            },
+            "pickup": {
+                "y": 6,
+                "x": 9
+            },
+            "deliveryFee": 22.0,
+            "id": 6
+        },
+        {
+            "dropoff": {
+                "y": 9,
+                "x": 15
+            },
+            "pickup": {
+                "y": 8,
+                "x": 17
+            },
+            "deliveryFee": 6.0,
+            "id": 7
+        },
+        {
+            "dropoff": {
+                "y": 1,
+                "x": 16
+            },
+            "pickup": {
+                "y": 9,
+                "x": 18
+            },
+            "deliveryFee": 20.0,
+            "id": 8
         }
-      ]
+    ],
+    "deliveryHeadquarter": {
+        "y": 9,
+        "x": 9
     }
-
+}
   
   (G, hq) = map2graph(graph_map)
   pd_pairs, revenue, ids = convert_request_to_pd(request_data)

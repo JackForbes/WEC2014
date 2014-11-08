@@ -16,7 +16,7 @@ def map2graph(maplist):
                 for (i_n, j_n) in neighbours:
                     try:
                         if not(maplist[i_n][j_n] == 'X'):
-                            G.add_edge((i_n, j_n),(i,j));
+                            G.add_edge((j_n,i_n),(j,i));
                     except IndexError:
                         pass
     return G, hq
@@ -42,8 +42,8 @@ def data2json(nodes, action_ids, package_ids):
         if action_id in (2,3):
             action_drive = {
                 'action' : 'drive',
-                'x' : node[0],
-                'y' : node[1]
+                'x' : node[1],
+                'y' : node[0]
             }
 
             action = {
@@ -56,8 +56,8 @@ def data2json(nodes, action_ids, package_ids):
         else:
             action = {
                 'action' : action_name,
-                'x' : node[0],
-                'y' : node[1],
+                'x' : node[1],
+                'y' : node[0],
             }
             output[0]['actions'].append(action)
 
