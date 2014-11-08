@@ -6,6 +6,7 @@ angular.module('myApp.controllers', [])
 
     $scope.initialize = function() {
       $scope.inputData = SiteModel.emptyInput;
+      $scope.outputData = SiteModel.sampleOutput;
     };
 
     $scope.loadSubreddit = function(subreddit, type) {

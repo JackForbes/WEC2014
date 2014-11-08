@@ -10,32 +10,9 @@
   <link rel="icon" type="image/png" href="WEC2014/WEC2014/static/img/favicon.ico">
   <link href='https://fonts.googleapis.com/css?family=tangerine|Raleway|Open+Sans' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="WEC2014/WEC2014/static/css/app.css"/>
-  <link rel="stylesheet" href="WEC2014/WEC2014/static/css/autocomplete.css"/>
   <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body ng-controller="PageCtrl" ng-init="initialize()">
-
-<!--   <div class="autocomplete" ng-hide="elements.length">
-    <i class="fa fa-2x"
-      ng-class="{'fa-spinner fa-spin': (subreddits.length < 1 && !noAutocomplete), 'fa-search': (subreddits.length || noAutocomplete)}">
-    </i>
-    <input type="text" autocomplete
-    autofocus="true"
-    ng-model="searchParam"
-    placeholder="Search for a Subreddit"
-    ng-focus="focused = true"
-    ng-blur="blur()">
-    <ul ng-show="searchParam.length > 0 && focused" class="suggestions">
-      <li
-      ng-repeat="suggestion in subreddits | filter:searchParam | orderBy:'toString()' | limitTo:10 track by $index"
-      val="{{suggestion}}"
-      ng-class="{ 'active': $index == selectedIndex }"
-      ng-click="submitSubreddit(suggestion)"
-      ng-bind-html="suggestion | highlight:searchParam">
-      </li>
-    </ul>
-  </div> -->
-
 
   <div class="slide panel panel-left">
     <h3 class="panel-title">Input</h3>
@@ -79,7 +56,6 @@
         </tr>
         <tr>
           <td>
-            <!-- <h3 class="fade">{{inputData.requests.length + 1}}</h3> -->
             <i class="fa fa-plus-square addPoint" ng-click="addPoint()"></i>
           </td>
           <td class="cell-background">
@@ -111,22 +87,26 @@
 
   <div class="slide panel panel-right">
     <h3 class="panel-title">Output</h3>
-    <div>
-      {{output}}
+    <div ng-repeat="carrier in outputData">
+        <div>
+          <h5 class="carrier">Carrier: {{carrier.carrierId}}</h5>
+          <table>
+          <tbody>
+            <tr><td>Action</td><td>Coordinate</td></tr>
+            <tr ng-repeat="action in carrier.actions ">
+              <td class="cell-background">{{action.action}}</td>
+              <td class="cell-background">
+                <small class="label label-username">
+                  <i class="fa fa-suitcase"></i>({{action.x}}, {{action.y}})
+                </small>
+              </td>
+            </tr>
+          </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
-
-<!--   <div class="footer" ng-class="{'relative': elements.length > 1}">
-    <a class="website" href="http://jackforbes.net" target="_blank">
-      <i class="fa fa-user"></i>
-    </a>
-    <a class="github" href="https://github.com/JackForbes/Pebble" target="_blank">
-      <i class="fa fa-github-square"></i>
-    </a>
-    <a class="linked-in" href="http://ca.linkedin.com/in/greaturl/" target="_blank">
-      <i class="fa fa-linkedin-square"></i>
-    </a>
-  </div> -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-touch.min.js"></script>
