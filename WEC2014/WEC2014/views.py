@@ -46,4 +46,12 @@ def solve_case(G, start, pd):
 
   return visited_nodes, actions
 
+def convert_request_to_pd (req):
+  l = []
+  for k in req['requests']:
+    pick = k['pickup']
+    drop = k['dropoff']
+
+    l.append(((pick['x'], pick['y']), (drop['x'], drop['y'])))
+  return l
  
